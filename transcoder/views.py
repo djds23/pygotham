@@ -1,6 +1,8 @@
 from django.shortcuts import render_to_response, render
 from django.http import HttpResponse
-from pytube import YouTube
+
+from utils import pull_url
+from videogrep import videogrep
 
 def index(request):
     return render(request, 'transcoder/index.html', {
@@ -15,4 +17,6 @@ def yt_url_handler(request):
         return render(request, 'transcoder/index.html', {
             'error':'Missing or Invalid Parameters',
         })
-    return render(request, 'transcoder/processing.html')
+    filenames = pull_url(url)
+    videogrep.videogrep(filenames['filename'], 'output.mp4', search_term, 'pos' )
+    return render(request, 'transcoder/success.html')

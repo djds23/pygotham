@@ -1,22 +1,18 @@
-from django.shortcuts import render_to_response, render
-from django.http import HttpResponse
+from django.shortcuts import render
 
-from utils import pull_url
-from videogrep import videogrep
+from transcoder.static.videos.utils import make_element
 
 def index(request):
     return render(request, 'transcoder/index.html', {
         'error': None,
     })
 
-def yt_url_handler(request):
+def twitter_handler(request):
     try:
-        url = request.POST['url']
-        search_term = request.POST['search_term']
+        twitter_handle = request.POST['twitter_handle']
     except KeyError:
         return render(request, 'transcoder/index.html', {
             'error':'Missing or Invalid Parameters',
         })
-    filenames = pull_url(url)
-    videogrep.videogrep(filenames['filename'], 'output.mp4', search_term, 'pos' )
+    make_element(twitter_handle)
     return render(request, 'transcoder/success.html')

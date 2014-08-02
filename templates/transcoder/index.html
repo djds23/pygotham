@@ -9,7 +9,7 @@
             </div>
         </div>
         <div class="large-4 columns">
-            <img src="{% static 'ffmpeg_logo.jpg' %}"
+            <img src="{% static 'transcoder/images/ffmpeg_logo.jpg' %}"
         </div>
     </div>
 <hr />
@@ -33,28 +33,20 @@
         </div>
         {% endif %}
 
-    <form action="{% url 'transcoder.views.yt_url_handler' %}" method="post">
+    <form action="{% url 'transcoder.views.twitter_handler' %}" method="post">
     {% csrf_token %}
     <div class="row">
         <div class="large-12">
             <div class="row">
                 <div class="small-3 columns">
-                    <label for="right-label" class="right inline">YouTube Url:</label>
+                    <label for="right-label" class="right inline">Twitter Handle</label>
                 </div>
                 <div class="small-9 columns">
-                    <input name="url" type="url" id="right-label" placeholder="YouTube Url with Subtitles">
+                    <input name="twitter_handle" type="text" id="right-label" placeholder="Enter a Twitter handle here!">
                 </div>
             </div>
             <div class="row">
-                <div class="small-3 columns">
-                    <label for="right-label" class="right inline">Keywords:</label>
-                </div>
-                <div class="small-9 columns">
-                    <input name="search_term" type="search" id="right-label" placeholder="Search Keywords">
-                </div>
-            </div>
-            <div class="row">
-                <input class="button expand" type="submit" value="Make my supercut!">
+                <input class="button expand" type="submit" value="Make my slideshow!">
             </div>
         </div>
     </div>
